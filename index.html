@@ -1,0 +1,209 @@
+<!DOCTYPE html><html><head><title></title><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /><style type='text/css'>
+body {
+  font-family: 'Helvetica';
+  letter-spacing:-5px;
+  background:#fff;
+  background-size:100%;
+  color:#111;
+  margin:0;
+  padding:0;
+  font-weight:bold;
+}
+
+h1, h2, h3, p {
+  margin:0;
+}
+
+em, a {
+  font-style:normal;
+  color:#CB2A3C;
+}
+
+a {
+  background-color:#4CA3D9;
+  color:#fff;
+  text-decoration:none;
+}
+
+strong {
+  color:#4ca3d9;
+}
+
+img {
+  width:100%;
+}
+
+div {
+  cursor:pointer;
+  cursor:hand;
+  position:absolute;
+  top:0;
+  left:0;
+}
+</style><script type='text/javascript'>
+window.onload = function() {
+    var s = document.getElementsByTagName('div'), cur = 0;
+    if (!s) return;
+    function go(n) {
+        cur = n;
+        var i = 1e3, e = s[n];
+        for (var k = 0; k < s.length; k++) s[k].style.display = 'none';
+        e.style.display = 'inline';
+        e.style.fontSize = i + 'px';
+        if (e.firstChild.nodeName === 'IMG') {
+            document.body.style.backgroundImage = 'url(' + e.firstChild.src + ')';
+            e.firstChild.style.display = 'none';
+        } else {
+            document.body.style.backgroundImage = '';
+            document.body.style.backgroundColor = e.style.backgroundColor;
+        }
+        while (
+            e.offsetWidth > window.innerWidth ||
+            e.offsetHeight > window.innerHeight) {
+            e.style.fontSize = (i -= 10) + 'px';
+            if (i < 0) break;
+        }
+        e.style.marginTop = ((window.innerHeight - e.offsetHeight) / 2) + 'px';
+        if (window.location.hash !== n) window.location.hash = n;
+        document.title = e.textContent || e.innerText;
+    }
+    document.onclick = function() {
+        go(++cur % (s.length));
+    };
+    document.onkeydown = function(e) {
+        (e.which === 39) && go(Math.min(s.length - 1, ++cur));
+        (e.which === 37) && go(Math.max(0, --cur));
+    };
+    function parse_hash() {
+        return Math.max(Math.min(
+            s.length - 1,
+            parseInt(window.location.hash.substring(1), 10)), 0);
+    }
+    if (window.location.hash) cur = parse_hash() || cur;
+    window.onhashchange = function() {
+        var c = parse_hash();
+        if (c !== cur) go(c);
+    };
+
+    go(cur);
+};
+</script></head><body>
+<div>Maps From Top To Bottom</div>
+<div>(For the wonderful group of <a href="http://www.codeforamerica.org/2014-fellows/">2014 Code for America Fellows</a>!)</div>
+<div>You can follow along with this presentation at <a href="http://lyzidiamond.com/fifthworld">lyzidiamond.com/fifthworld</a>.</div>
+<div><strong>What</strong> even is a map? <strong>How</strong> does it work?</div>
+<div>A <em>map</em> is a repesentation of a geographic area. It is made up of <em>layers</em> of data.</div>
+<div>Nicaragua cities: <img style="height:auto; width:auto; max-width:500px; max-height:500px;" src="images/nicaragua_cities.png"></div>
+<div>What <em>layers</em> do you see in this map?</div>
+<div><strong>Cities</strong>, <strong>water</strong>, <strong>the base country layer</strong>, and the <strong>labels</strong>, also called <strong>annotation</strong>.</div>
+<div>There are two types of layers found on maps: <em>raster</em> layers and <em>vector</em> layers.</div>
+<div><strong>Raster</strong> layers are like photos: they have pixels that each have a data value inside them.</div>
+<div>These values can be <em>colors</em>, but they can also be <em>elevations</em>, <em>temperature</em>, or many other data types.</div>
+<div>Unless given some reference points, <strong>raster</strong> layers do not typically know where they are in the world.</div>
+<div><strong>Vector</strong> data does know where it is in the world, and stores geometries instead of pixels. This data is typically either <strong>points</strong>, <strong>lines</strong>, or <strong>polygons</strong>.</div>
+<div>Vector data: <img style="height:auto; width:auto; max-width:500px; max-height:500px;" src="images/vectors.jpeg"></div>
+<div>In addition to geometry, however, vector features can and mostly do include lots of <em>other information</em>!</div>
+<div><strong>Geometry</strong> is just like one of the columns in a table.</div>
+<div><img src="images/attribute_table.jpg"></div>
+<div>The most common vector data format you'll come across during your residency is the <a href="http://en.wikipedia.org/wiki/Shapefile">shapefile</a>.</div>
+<div>(It's actually a misnomer: shapefiles have <em>four</em> separate files that contain information, but for all intents and purposes, it's one thing.)</em></div>
+<div><em>Shapefiles</em> were developed by Esri, the makers of <a href="http://arcgis.com">ArcGIS</a>.</div>
+<div>I can basically guarantee that <em>every</em> government GIS person you meet will know ArcGIS and will know what a shapefile is.</div>
+<div>Shapefiles have geometry information, as well as an associated <strong>attribute table</strong>.</div>
+<div><img src="images/attribute_table.jpg"></div>
+<div>(We'll talk a little more about <em>ArcGIS</em> in a minute.)</div>
+<div>The other major data type you're going to hear about is the <strong>feature class</strong>, which lives inside a <strong>file geodatabase</strong>.</div>
+<div><img src="images/gis_data.jpg"></div>
+<div>These are proprietary, <em>closed-source</em> formats made by Esri.</div>
+<div>In the GIS world, this is the <strong>new sexiness</strong> in GIS data. Shapefiles are regarded as antiquated.</div>
+<div><em>However!</em></div>
+<div>If you're getting GIS data, you <strong>MUST</strong> request it as a shapefile.</div>
+<div>Shapefiles are an <strong>open</strong> format. File geodatabases and feature classes are not.</div>
+<div>It is almost <em>impossible</em> to visualize, style, or do analysis on feature classes without using ArcGIS.</div>
+<div><strong>Ask for your data as shapefiles!</strong> It takes them two seconds and saves you a ton of time.</div>
+<div>Other geodata formats include <em>GeoJSON</em>, <em>TopoJSON</em>, <em>KML</em>, and a few others that are less popular.</div>
+<div>(You'll definitely hear more about <strong>GeoJSON</strong> later!)</div>
+<div>So, going back. What is <em>ArcGIS</em>?</div>
+<div>Actually, first, <strong>what is GIS?</strong></div>
+<div><em>GIS</em> is an acronym for <strong>geographic information systems</strong>.</div>
+<div>The concept was invented by <a href="http://esri.com">Esri</a> back in the 1960s when they started making software.</div>
+<div>So, again. What is <em>ArcGIS</em>?</div>
+<div>ArcGIS is <strong>enterprise software</strong> for geographic data analysis and visualization.</div>
+<div><img src="images/arcgis.png"></div>
+<div>What exactly is <em>geographic data analysis</em>?</div>
+<div>Also known as spatial analysis, it is the <strong>manipulation</strong> of geographic data to make new data and find patterns.</div>
+<div>For example...</div>
+<div>Buffers! <br><img style="height:auto; width:auto; max-width:900px; max-height:900px;" src="images/buffer.png"></div>
+<div><em>Pretty cool, right?</em></div>
+<div>GIS people do this a <strong>lot</strong>, in a lot of departments, for a variety of reasons.</div>
+<div>Even just the ability to create geographic data makes ArcGIS revolutionary in its field. It can do <em>many things</em>!</div>
+<div>ArcGIS does have <em>five</em> fairly significant limitations.</div> 
+<div><strong>First:</strong> it is a Windows application.</div>
+<div>Parallels... <img style="height:auto; width:auto; max-width:900px; max-height:900px;" src="images/arcgis.png"></div>
+<div><strong>Second:</strong> it's really really expensive.</div>
+<div>Seriously.<br><img style="height:auto; width:auto; max-width:900px; max-height:900px;" src="images/pricing.png"></div>
+<div><strong>Third:</strong> it's buggy. Like, really buggy.</div>
+<div>This is common.<br><img src="images/esri_error.jpg"></div>
+<div><strong>Fourth:</strong> You can't use data from external harddrives.</div>
+<div>And <strong>fifth:</strong> It doesn't have great web tools.</div>
+<div><img src="images/arcgis_online.jpg"></div>
+<div>Esri recently started doing web stuff, thorugh a portal they call <a href="http://arcgis.com">ArcGIS Online</a>.</div>
+<div><strong>ArcGIS Online</strong> is a lot like the desktop software, but in the browser and with less functionality.</div>
+<div>One <em>great</em> thing about it, though, is its infrastructure for cloud storage of geographic data.</div>
+<div>If your city has any web maps on their site they are probably thorugh an <strong>ArcGIS viewer</strong> of some sort, with data from ArcGIS Online (or their own ArcGIS server).</div>
+<div><img src="images/hazvu.png"></div>
+<div>ArcGIS also has a <a href="http://js.arcgis.com">JavaScript API</a>.</div>
+<div>It is mostly used to access files hosted on ArcGIS Online, and it is based on a library called <strong>dojo</strong>.</div>
+<div>(They're working on it.)</div>
+<div>It's important to remember: ArcGIS Online is the <em>bleeding edge</em> of government GIS for most of the country.</div>
+<div>If they have web maps at all, GIS people are <strong>extremely</strong> proud.</div>
+<div><img src="images/lex.png"></div>
+<div>If we have enough time right now, I can talk briefly about <strong>web maps</strong> and how they work...</div>
+<div>But if not, I'll include a <strong>conclusion</strong> here.</div>
+<div>GIS staff spend a lot of their days <em>defending</em> their work to their bosses. It's very technical, which can make it hard to understand.</div>
+<div>(And I didn't even get into <a href="http://wiki.gis.com/wiki/index.php/Projections">projections</a> or <a href="http://wiki.gis.com/wiki/index.php/Map_algebra">map algebra</a> or the challenges surrounding <a href="http://wiki.gis.com/wiki/index.php/Symbology">symbology</a>!)</div>
+<div>If you can go in <em>knowledgeable</em>, it'll be way easier to get data and get stuff done.</div>
+<div><strong>Oh, and... MAPS ARE AWESOME!</strong></div>
+<div>Thanks.</div>
+<div>PS Let's talk about web maps.</div>
+<div>First of all: What characterizes a <em>web map</em>?</div>
+<div><strong>Tiles*</strong></div>
+<div>*(This isn't ALWAYS the case, but we'll pretend it is for now.)</div>
+<div>"... web maps are made up of many small, square images called <em>tiles</em>."</div>
+<div>"These tiles are typically 256x256 pixels and are placed side-by-side in order to create the illusion of a very large seamless image."</div>
+<div><a href="http://mapbox.com/developers/guide">(Thanks for the explanation, MapBox!)</a></div>
+<div>You may be asking yourself: <strong>But what about when I zoom in? How come the resolution stays so good?</strong></div>
+<div>Well, each <em>zoom level</em> has its own set of tiles!</div>
+<div>Zoom level 0: <strong>1</strong> tile for the world.</div>
+<div><img src="http://tile.openstreetmap.org/0/0/0.png" /></div>
+<div>With each additional zoom level, the number of tiles increases exponentially.</div>
+<div>Zoom level 1: <strong>4</strong> tiles for the world.</div>
+<div>Zoom level 2: <strong>16</strong> tiles for the world.</div>
+<div>Any guesses how many tiles are in zoom level 3?</div>
+<div>Aw yeah, you got it. <strong>64</strong>! Y'all are great at math.</div>
+<div>Map tiles only render when you're looking at them in that moment, so tiles make maps hella fast.</div>
+<div>Map tiles are just images on the web, so you can link to them individually.</div>
+<div>For example: <a href="http://tile.openstreetmap.org/4/2/3.png">http://tile.openstreetmap.org/4/2/3.png</a></div>
+<div>In order to understand how this works, let's break down the URL.</div>
+<div>http://<em>tile.openstreetmap.org</em>/4/2/3.png -- this is the name of the tile server.</div>
+<div>http://tile.openstreetmap.org/<em>4</em>/2/3.png -- this is the z value, or the zoom level.</div>
+<div>http://tile.openstreetmap.org/4/<em>2/3</em>.png -- This is the y/x value, or the place in the grid where the tile lives.</div>
+<div><img src="images/tilegrid.png"></div>
+<div><em>Feature Layers</em></div>
+<div>Feature layers are map layers that live on top of your base tiles. Sometimes you can interact with them (clicking to produce a popup, for example).</div>
+<div>They are often <em>vector</em> layers (points, lines, polygons).</div>
+<div>(Not every web map contains a feature layer, but they are fairly typical.)</div>
+<div>What data types can we use for adding feature layers to a web map?</div>
+<div><a href="http://github.com/lyzidiamond/learn-geojson">GeoJSON</a> is one.</div>
+<div>KML is another. So is TopoJSON. And even SVG.</div>
+<div>Some mapping libraries allow you to define vector data points <em>within your script itself.</em></div>
+<div>But we're getting ahead of ourselves. There's one more thing that makes a web map:</div>
+<div><em>It's on the web!</em></div>
+<div>In order to allow you to zoom and pan and add tooltips, you need some <strong>JavaScript</strong>.</div>
+<div>Fortunately, we have <strong>mapping libraries</strong> that can help us out!</div>
+<div>One of them is <a href="http://leafletjs.com">Leaflet</a>, which I would love to do a training on in <em>March</em>.</div>
+<div>There's a lot more, but for now, <strong>play around with web maps</strong>.</div>
+<div>Look at the <em>page source</em>, and then also <strong>inspect elements</strong>. See how they work. It's pretty cool.</div>
+<div><strong>I am also always available to answer questions!</strong></div>
+<div><em>Thanks</em> (again).</div>
+<div><em>lyzi@codeforamerica.org</em><br><em>@lyzidiamond on Twitter and GitHub</em></div>
