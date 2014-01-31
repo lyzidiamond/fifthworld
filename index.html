@@ -116,10 +116,10 @@ window.onload = function() {
 <div>The other major data type you're going to hear about is the <strong>feature class</strong>, which lives inside a <strong>file geodatabase</strong>.</div>
 <div><img src="images/gis_data.jpg"></div>
 <div>These are proprietary, <em>closed-source</em> formats made by Esri.</div>
-<div>In the GIS world, this is the <strong>new sexiness</strong> in GIS data. Shapefiles are regarded as antiquated.</div>
+<div>This is the <strong>new sexiness</strong> in GIS data. Shapefiles are regarded as antiquated.</div>
 <div><em>However!</em></div>
-<div>If you're getting GIS data, you <strong>MUST</strong> request it as a shapefile.</div>
-<div>Shapefiles are an <strong>open</strong> format. File geodatabases and feature classes are not.</div>
+<div>If you're seeking GIS data from your city, you <strong>MUST</strong> request it as a shapefile.</div>
+<div>Shapefiles are an <strong>open</strong> format. File geodatabases and feature classes are <em>not</em>.</div>
 <div>It is almost <em>impossible</em> to visualize, style, or do analysis on feature classes without using ArcGIS.</div>
 <div><strong>Ask for your data as shapefiles!</strong> It takes them two seconds and saves you a ton of time.</div>
 <div>Other geodata formats include <em>GeoJSON</em>, <em>TopoJSON</em>, <em>KML</em>, and a few others that are less popular.</div>
@@ -129,10 +129,10 @@ window.onload = function() {
 <div><em>GIS</em> is an acronym for <strong>geographic information systems</strong>.</div>
 <div>The concept was invented by <a href="http://esri.com">Esri</a> back in the 1960s when they started making software.</div>
 <div>So, again. What is <em>ArcGIS</em>?</div>
-<div>ArcGIS is <strong>enterprise software</strong> for geographic data analysis and visualization.</div>
+<div>ArcGIS is <strong>enterprise software</strong> for <em>geographic data analysis</em> and <em>visualization</em>.</div>
 <div><img src="images/arcgis.png"></div>
 <div>What exactly is <em>geographic data analysis</em>?</div>
-<div>Also known as spatial analysis, it is the <strong>manipulation</strong> of geographic data to make new data and find patterns.</div>
+<div>Also known as <em>spatial analysis</em>, it is the <strong>manipulation</strong> of geographic data to make new data and find patterns.</div>
 <div>For example...</div>
 <div>Buffers! <br><img style="height:auto; width:auto; max-width:900px; max-height:900px;" src="images/buffer.png"></div>
 <div><em>Pretty cool, right?</em></div>
@@ -149,23 +149,25 @@ window.onload = function() {
 <div><img src="images/arcgis_online.jpg"></div>
 <div>Esri recently started doing web stuff, thorugh a portal they call <a href="http://arcgis.com">ArcGIS Online</a>.</div>
 <div><strong>ArcGIS Online</strong> is a lot like the desktop software, but in the browser and with less functionality.</div>
-<div>One <em>great</em> thing about it, though, is its infrastructure for cloud storage of geographic data.</div>
-<div>If your city has any web maps on their site they are probably thorugh an <strong>ArcGIS viewer</strong> of some sort, with data from ArcGIS Online (or their own ArcGIS server).</div>
+<div>One <em>great</em> thing about it, though, is its <strong>infrastructure for cloud storage</strong> of geographic data.</div>
+<div>(This allows folks who do not pay for <em>ArcGIS Server</em> to still have a repository of geographic data.)</div>
+<div>If your city has any web maps on their site they are probably thorugh an <strong>ArcGIS viewer</strong> of some sort, with data from <em>ArcGIS Online</em> or <em>ArcGIS Server</em>.</div>
+<div>This is what Esri's <em>flex viewer</em> looks like.</div>
 <div><img src="images/hazvu.png"></div>
 <div>ArcGIS also has a <a href="http://js.arcgis.com">JavaScript API</a>.</div>
-<div>It is mostly used to access files hosted on ArcGIS Online, and it is based on a library called <strong>dojo</strong>.</div>
+<div>It is mostly used to <em>access files</em> hosted on ArcGIS Online, and it is based on a library called <strong>dojo</strong>.</div>
 <div>(They're working on it.)</div>
 <div>It's important to remember: ArcGIS Online is the <em>bleeding edge</em> of government GIS for most of the country.</div>
 <div>If they have web maps at all, GIS people are <strong>extremely</strong> proud.</div>
 <div><img src="images/lex.png"></div>
 <div>If we have enough time right now, I can talk briefly about <strong>web maps</strong> and how they work...</div>
 <div>But if not, I'll include a <strong>conclusion</strong> here.</div>
-<div>GIS staff spend a lot of their days <em>defending</em> their work to their bosses. It's very technical, which can make it hard to understand.</div>
+<div>GIS staff spend a lot of their time <em>defending</em> their work to their bosses. It's very technical, which can make it hard to understand.</div>
 <div>(And I didn't even get into <a href="http://wiki.gis.com/wiki/index.php/Projections">projections</a> or <a href="http://wiki.gis.com/wiki/index.php/Map_algebra">map algebra</a> or the challenges surrounding <a href="http://wiki.gis.com/wiki/index.php/Symbology">symbology</a>!)</div>
 <div>If you can go in <em>knowledgeable</em>, it'll be way easier to get data and get stuff done.</div>
-<div><strong>Oh, and... MAPS ARE AWESOME!</strong></div>
+<div>Oh, and... <strong>MAPS ARE AWESOME!</strong></div>
 <div>Thanks.</div>
-<div>PS Let's talk about web maps.</div>
+<div>PS Let's talk about <em>web maps</em>.</div>
 <div>First of all: What characterizes a <em>web map</em>?</div>
 <div><strong>Tiles*</strong></div>
 <div>*(This isn't ALWAYS the case, but we'll pretend it is for now.)</div>
@@ -175,28 +177,29 @@ window.onload = function() {
 <div>You may be asking yourself: <strong>But what about when I zoom in? How come the resolution stays so good?</strong></div>
 <div>Well, each <em>zoom level</em> has its own set of tiles!</div>
 <div>Zoom level 0: <strong>1</strong> tile for the world.</div>
-<div><img src="http://tile.openstreetmap.org/0/0/0.png" /></div>
-<div>With each additional zoom level, the number of tiles increases exponentially.</div>
+<div>Zoom 0: <img src="http://tile.openstreetmap.org/0/0/0.png" /></div>
+<div>With each additional zoom level, the number of tiles increases <em>exponentially</em>.</div>
 <div>Zoom level 1: <strong>4</strong> tiles for the world.</div>
+<div>Four tiles! <img src="images/tilegrid.png"></div>
 <div>Zoom level 2: <strong>16</strong> tiles for the world.</div>
-<div>Any guesses how many tiles are in zoom level 3?</div>
+<div>Any <em>guesses</em> how many tiles are in zoom level 3?</div>
 <div>Aw yeah, you got it. <strong>64</strong>! Y'all are great at math.</div>
-<div>Map tiles only render when you're looking at them in that moment, so tiles make maps hella fast.</div>
-<div>Map tiles are just images on the web, so you can link to them individually.</div>
+<div>Map tiles only render when you're looking at them in that moment, so tiles make maps <em>hella</em> fast.</div>
+<div>Map tiles are just <strong>images on the web</strong>, so you can link to them individually.</div>
 <div>For example: <a href="http://tile.openstreetmap.org/4/2/3.png">http://tile.openstreetmap.org/4/2/3.png</a></div>
 <div>In order to understand how this works, let's break down the URL.</div>
 <div>http://<em>tile.openstreetmap.org</em>/4/2/3.png -- this is the name of the tile server.</div>
 <div>http://tile.openstreetmap.org/<em>4</em>/2/3.png -- this is the z value, or the zoom level.</div>
 <div>http://tile.openstreetmap.org/4/<em>2/3</em>.png -- This is the y/x value, or the place in the grid where the tile lives.</div>
 <div><img src="images/tilegrid.png"></div>
-<div><em>Feature Layers</em></div>
-<div>Feature layers are map layers that live on top of your base tiles. Sometimes you can interact with them (clicking to produce a popup, for example).</div>
+<div>What else makes a web map? <strong>Feature layers</strong>.</div>
+<div>Feature layers are map layers that live <strong>on top of</strong> your base tiles. Sometimes you can interact with them (clicking to produce a popup, for example).</div>
 <div>They are often <em>vector</em> layers (points, lines, polygons).</div>
 <div>(Not every web map contains a feature layer, but they are fairly typical.)</div>
-<div>What data types can we use for adding feature layers to a web map?</div>
+<div>What <strong>data types</strong> can we use for adding feature layers to a web map?</div>
 <div><a href="http://github.com/lyzidiamond/learn-geojson">GeoJSON</a> is one.</div>
-<div>KML is another. So is TopoJSON. And even SVG.</div>
-<div>Some mapping libraries allow you to define vector data points <em>within your script itself.</em></div>
+<div><em>KML</em> is another. So is <em>TopoJSON</em>. And even <em>SVG</em>.</div>
+<div>Some mapping libraries allow you to define vector data points <em>within your script itself</em>.</div>
 <div>But we're getting ahead of ourselves. There's one more thing that makes a web map:</div>
 <div><em>It's on the web!</em></div>
 <div>In order to allow you to zoom and pan and add tooltips, you need some <strong>JavaScript</strong>.</div>
